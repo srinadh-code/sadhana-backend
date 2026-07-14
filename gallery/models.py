@@ -1,30 +1,35 @@
 from django.db import models
 
-class Event(models.Model):
+# Create your models here.
+from django.db import models
 
+from cloudinary.models import CloudinaryField
+class Gallery(models.Model):
     CATEGORY_CHOICES = (
-        ("Academic","Academic"),
-        ("Sports","Sports"),
-        ("Cultural","Cultural"),
-        ("National","National"),
-        ("Festival","Festival"),
-        ("Other","Other"),
+        ("Campus", "Campus"),
+        ("Classrooms", "Classrooms"),
+        ("Laboratories", "Laboratories"),
+        ("Sports", "Sports"),
+        ("Events", "Events"),
+        ("Transport", "Transport"),
+        ("Hostel", "Hostel"),
+        ("Activities", "Activities"),
+        ("Other", "Other"),
     )
 
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=200)
 
     category = models.CharField(
         max_length=50,
-        choices=CATEGORY_CHOICES
+        choices=CATEGORY_CHOICES,
+        default="Campus",
     )
 
-    description = models.TextField()
+    image = CloudinaryField("image")
 
-    event_date = models.DateField()
+    description = models.TextField(blank=True)
 
-    image = models.ImageField(upload_to="events")
-
-    is_upcoming = models.BooleanField(default=True)
+    display_order = models.PositiveIntegerField(default=0)
 
     is_active = models.BooleanField(default=True)
 
@@ -33,7 +38,10 @@ class Event(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering=["-event_date"]
+        ordering = ["display_order", "-created_at"]
+        verbose_name = "Gallery Image"
+        verbose_name_plural = "Gallery"
 
     def __str__(self):
         return self.title
+    

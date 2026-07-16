@@ -52,6 +52,11 @@ INSTALLED_APPS = [
     'about',
     'facilities',
     'hostel',
+    'events',
+    'admission',
+    'contact',
+    'home',
+ 
    
 ]
 
@@ -205,6 +210,12 @@ cloudinary.config(
     api_secret=config("CLOUDINARY_API_SECRET"),
     secure=True,
 )
+
+
+from decouple import config
+
+BREVO_API_KEY = config("BREVO_API_KEY")
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
 
 print("Cloud Name:", cloudinary.config().cloud_name)
 print("API Key:", cloudinary.config().api_key)

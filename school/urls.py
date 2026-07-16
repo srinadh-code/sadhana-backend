@@ -25,4 +25,10 @@ urlpatterns = [
     path("api/about/", include("about.urls")),
     path("api/hostel/",include('hostel.urls')),
     path("api/facilities/",include("facilities.urls")),
+    path("api/events/", include("events.urls")),
+   
+    path("api/admissions/",include("admission.urls")),
+    path("api/home/", include("home.urls")),
+    path("api/contact/",include("contact.urls")),
+
 ]

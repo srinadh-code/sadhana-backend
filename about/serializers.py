@@ -1,3 +1,4 @@
+
 from rest_framework import serializers
 from .models import About, Faculty, Timeline, Achievement
 
@@ -12,13 +13,19 @@ class AboutSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def get_hero_image_url(self, obj):
-        return obj.hero_image.url if obj.hero_image else None
+        if obj.hero_image:
+            return str(obj.hero_image.url)
+        return None
 
     def get_story_image_url(self, obj):
-        return obj.story_image.url if obj.story_image else None
+        if obj.story_image:
+            return str(obj.story_image.url)
+        return None
 
     def get_principal_image_url(self, obj):
-        return obj.principal_image.url if obj.principal_image else None
+        if obj.principal_image:
+            return str(obj.principal_image.url)
+        return None
 
 
 class FacultySerializer(serializers.ModelSerializer):
@@ -29,7 +36,9 @@ class FacultySerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def get_image_url(self, obj):
-        return obj.image.url if obj.image else None
+        if obj.image:
+            return str(obj.image.url)
+        return None
 
 
 class TimelineSerializer(serializers.ModelSerializer):

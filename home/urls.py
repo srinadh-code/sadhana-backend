@@ -8,6 +8,8 @@ from .views import (
     WhyChooseUsDetailAPIView,
     CallToActionListCreateAPIView,
     CallToActionDetailAPIView,
+    TestimonialDetailAPIView,
+    TestimonialListCreateAPIView
 )
 
 urlpatterns = [
@@ -58,4 +60,12 @@ urlpatterns = [
         CallToActionDetailAPIView.as_view(),
         name="cta-detail",
     ),
+    path(
+    "testimonials/",
+    TestimonialListCreateAPIView.as_view(),
+),
+path(
+    "testimonials/<int:pk>/",
+    TestimonialDetailAPIView.as_view(),
+),
 ]

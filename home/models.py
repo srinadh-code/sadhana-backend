@@ -71,3 +71,17 @@ class CallToAction(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Testimonial(models.Model):
+    name = models.CharField(max_length=100)
+    role = models.CharField(max_length=100)
+    quote = models.TextField()
+    image = models.ImageField(upload_to="testimonials/")
+    display_order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ["display_order"]
+
+    def __str__(self):
+        return self.name

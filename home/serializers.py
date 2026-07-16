@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import HeroSlide, Statistic, WhyChooseUs, CallToAction
+from .models import HeroSlide, Statistic, WhyChooseUs, CallToAction,Testimonial
 
 
 class HeroSlideSerializer(serializers.ModelSerializer):
@@ -34,3 +34,13 @@ class CallToActionSerializer(serializers.ModelSerializer):
 
     def get_background_image_url(self, obj):
         return obj.background_image.url if obj.background_image else None
+    
+class TestimonialSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Testimonial
+        fields = "__all__"
+
+    def get_image_url(self, obj):
+        return obj.image.url if obj.image else ""

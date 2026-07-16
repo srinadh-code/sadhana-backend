@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from .models import HeroSlide, Statistic, WhyChooseUs, CallToAction
+from .models import HeroSlide, Statistic, WhyChooseUs, CallToAction,Testimonial
 
 
 @admin.register(HeroSlide)
@@ -35,3 +35,5 @@ class CallToActionAdmin(admin.ModelAdmin):
     list_filter = ("is_active",)
     list_editable = ("is_active",)
     search_fields = ("title",)
+    
+admin.site.register(Testimonial)

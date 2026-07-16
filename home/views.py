@@ -176,3 +176,44 @@ class CallToActionDetailAPIView(APIView):
         cta = self.get_object(pk)
         cta.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+from .models import Testimonial
+from. serializers import TestimonialSerializer
+class TestimonialListCreateAPIView(APIView):
+
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [AllowAny()]
+        return [IsAuthenticated()]
+
+    def get(self, request):
+        testimonials = Testimonial.objects.filter(is_active=True)
+        serializer = TestimonialSerializer(testimonials, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        serializer = TestimonialSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+class TestimonialDetailAPIView(APIView):
+
+    def get_permissions(self):
+        if self.request.method == "GET":
+            return [AllowAny()]
+        return [IsAuthenticated()]
+
+    def put(self, request, pk):
+        testimonial = get_object_or_404(Testimonial, pk=pk)
+        serializer = TestimonialSerializer(
+            testimonial,
+            data=request.data,
+            partial=True
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+
+    def delete(self, request, pk):
+        testimonial = get_object_or_404(Testimonial, pk=pk)
+        testimonial.delete()
+        return Response(status=204)

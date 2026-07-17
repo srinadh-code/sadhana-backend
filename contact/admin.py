@@ -8,6 +8,7 @@ class ContactInfoAdmin(admin.ModelAdmin):
         "school_name",
         "phone",
         "email",
+        "whatsapp",
     )
 
 

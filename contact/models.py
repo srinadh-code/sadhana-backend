@@ -7,6 +7,7 @@ class ContactInfo(models.Model):
     address = models.TextField()
     phone = models.CharField(max_length=20)
     email = models.EmailField()
+    whatsapp = models.CharField(max_length=20, blank=True)
     office_hours = models.CharField(max_length=200)
     map_url = models.TextField(help_text="Google Maps Embed URL")
 

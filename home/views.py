@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 
+
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from .models import HeroSlide, Statistic, WhyChooseUs, CallToAction
@@ -195,6 +196,7 @@ class TestimonialListCreateAPIView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
+    
 class TestimonialDetailAPIView(APIView):
 
     def get_permissions(self):

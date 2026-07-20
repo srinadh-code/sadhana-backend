@@ -30,5 +30,4 @@ urlpatterns = [
     path("api/admissions/",include("admission.urls")),
     path("api/home/", include("home.urls")),
     path("api/contact/",include("contact.urls")),
-
 ]

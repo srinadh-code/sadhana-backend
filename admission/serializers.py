@@ -9,7 +9,7 @@ from .models import (
 )
 
 class AdmissionHeroSerializer(serializers.ModelSerializer):
-    image_url = serializers.SerializerMethodField()
+    # image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = AdmissionHero
@@ -17,21 +17,23 @@ class AdmissionHeroSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "subtitle",
-            "button_text",
-            "image",
-            "image_url",
+            # "button_text",
+            # "image",
+            # "image_url",
             "is_active",
         ]
+    def validate_title(self, value):
+        if not value.strip():
+            raise serializers.ValidationError("Title is required.")
+        return value
 
-    def get_image_url(self, obj):
-        request = self.context.get("request")
+    def validate_subtitle(self, value):
+        if not value.strip():
+            raise serializers.ValidationError("Subtitle is required.")
+        return value        
+        
 
-        if obj.image:
-            if request:
-                return request.build_absolute_uri(obj.image.url)
-            return obj.image.url
 
-        return None
     
 
 
@@ -46,6 +48,19 @@ class EligibilitySerializer(serializers.ModelSerializer):
             "display_order",
             "is_active",
         ]
+    def validate_title(self, value):
+        if not value.strip():
+                raise serializers.ValidationError(
+                "Eligibility is required."
+            )
+        return value
+
+    def validate_display_order(self, value):
+        if value < 0:
+            raise serializers.ValidationError(
+                "Display Order cannot be negative."
+            )
+        return value
 class RequiredDocumentSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -56,6 +71,12 @@ class RequiredDocumentSerializer(serializers.ModelSerializer):
             "display_order",
             "is_active",
         ]
+    def validate_display_order(self, value):
+        if value < 0:
+                raise serializers.ValidationError(
+            "Display Order cannot be negative."
+            )
+        return value
 
 class AdmissionEnquirySerializer(serializers.ModelSerializer):
 
@@ -106,3 +127,23 @@ class FAQSerializer(serializers.ModelSerializer):
             "display_order",
             "is_active",
         ]
+    def validate_question(self, value):
+            if not value.strip():
+                raise serializers.ValidationError(
+                "Question is required."
+            )
+            return value
+
+    def validate_answer(self, value):
+        if not value.strip():
+                raise serializers.ValidationError(
+                "Answer is required."
+            )
+        return value
+
+    def validate_display_order(self, value):
+            if value < 0:
+                raise serializers.ValidationError(
+                "Display Order cannot be negative."
+            )
+            return value

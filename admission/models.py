@@ -5,8 +5,8 @@ from cloudinary.models import CloudinaryField
 class AdmissionHero(models.Model):
     title = models.CharField(max_length=200)
     subtitle = models.TextField()
-    button_text = models.CharField(max_length=50, default="Apply Now")
-    image = CloudinaryField("image")
+    # button_text = models.CharField(max_length=50, default="Apply Now")
+    # image = CloudinaryField("image")
     is_active = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)

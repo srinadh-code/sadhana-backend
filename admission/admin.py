@@ -13,7 +13,6 @@ from .models import (
 class AdmissionHeroAdmin(admin.ModelAdmin):
     list_display = (
         "title",
-        "button_text",
         "is_active",
         "updated_at",
     )
